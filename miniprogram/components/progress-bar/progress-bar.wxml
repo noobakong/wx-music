@@ -1,0 +1,27 @@
+<view class="container">
+  <!-- 播放时间 总时间 -->
+  <text class="time">{{showTime.currentTime}}</text>
+
+  <view class="control">
+  <!-- 滑动圆点移动区域 -->
+  <movable-area class="movable-area">
+      <!-- 滑动圆点 -->
+      <movable-view 
+        direction="horizontal"
+        class="movable-view"
+        damping="1000"
+        x="{{movableDis}}"
+        bindchange="onChange"
+        bindtouchend="onTouchEnd"
+      />
+    </movable-area>
+    <!-- 滑动条 -->
+    <progress 
+      stroke-width="4"
+      backgroundColor="#969696"
+      activeColor="#fff"
+      percent="{{progress}}"
+    />
+  </view>
+  <text class="time">{{showTime.totalTime}}</text>
+</view>

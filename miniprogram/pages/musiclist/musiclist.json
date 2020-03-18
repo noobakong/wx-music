@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "x-musiclist": "/components/musiclist/musiclist"
+  },
+  "enablePullDownRefresh": true
+}
