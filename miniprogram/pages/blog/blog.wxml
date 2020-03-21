@@ -1,2 +1,18 @@
-<!--pages/blog/blog.wxml-->
-<text>pages/blog/blog.wxml</text>
+<view class="container">
+  <!-- header -->
+  <view class="header">
+    <view class="publish-container" bindtap="onPublish">
+      <text class="iconfont icon-fabu"></text>
+    </view>
+    <view class="search-container">
+      <x-search iconfont="iconfont" icon-sousuo="icon-sousuo"></x-search>
+    </view>
+  </view>
+
+  <!-- 底部弹出层 -->
+  <x-login modalShow="{{modalShow}}"
+    bind:loginfail="onLoginFail"
+    bind:loginsucess="onLoginSucess"
+  >  
+  </x-login>
+</view>
