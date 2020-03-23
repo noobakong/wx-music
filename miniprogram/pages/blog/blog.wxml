@@ -5,10 +5,18 @@
       <text class="iconfont icon-fabu"></text>
     </view>
     <view class="search-container">
-      <x-search iconfont="iconfont" icon-sousuo="icon-sousuo"></x-search>
+      <x-search iconfont="iconfont" icon-sousuo="icon-sousuo" bind:search="onSearch"></x-search>
     </view>
   </view>
 
+  <!-- 博客卡片列表 -->
+  <view class="blog-list">
+    <block wx:for="{{blogList}}" wx:key="index">
+      <view class="blog-pane">
+        <x-blog-card blog="{{item}}" bindtap="goDetail" data-blogid="{{item._id}}"/>
+      </view>
+    </block>
+  </view>
   <!-- 底部弹出层 -->
   <x-login modalShow="{{modalShow}}"
     bind:loginfail="onLoginFail"

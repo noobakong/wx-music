@@ -104,6 +104,7 @@ Page({
 
     wx.showLoading({
       title: 'd(￣▽￣*)b',
+      mask: true // 产生蒙版 阻止用户操作
     })
 
     let promiseArr = [] // 控制执行顺序
@@ -143,7 +144,7 @@ Page({
           ...userInfo,
           content,
           imgsrc: fileIds,
-          creatTime:db.serverDate() // 服务端时间
+          createTime:db.serverDate() // 服务端时间
         }
       }).then((res)=>{
         wx.hideLoading()
@@ -153,6 +154,9 @@ Page({
 
         // 返回到blog页面并刷新
         wx.navigateBack()
+        const pages = getCurrentPages()
+        const prevPage = pages[pages.length -2] // 取到上一个界面
+        prevPage.onPullDownRefresh()
       })
     }).catch((err)=>{
       wx.hideLoading()

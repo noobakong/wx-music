@@ -1,4 +1,5 @@
 // pages/blog/blog.js
+let keyword = '' //搜索关键字
 Page({
 
   /**
@@ -7,11 +8,20 @@ Page({
   data: {
     // 控制底部弹出层是否显示
     modalShow: false,
-    publishFlag : true // 防止发布点击多次
+    publishFlag : true, // 防止发布点击多次
+    blogList: [] // 存放博客列表
   },
 
+  onShow: function () {
+    this.publishFlag = true
+    // this.setData({
+    //   blogList: []
+    // })
+    // this._loadBlogList(0)
+  },
   //发布功能 
   onPublish(){
+    
     // 判断用户是否授权
     wx.getSetting({
       success:(res)=>{
@@ -20,8 +30,8 @@ Page({
           wx.getUserInfo({
             success:(res)=>{
               // console.log(res)
-
               if(!this.publishFlag){
+                console.log('发布')
                 return
               }
               this.publishFlag= false
@@ -38,6 +48,7 @@ Page({
         }
       }
     })
+
   },
 
   // 授权成功
@@ -59,55 +70,59 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this._loadBlogList()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  // 上拉触底事件处理函数
+  onReachBottom: function(){
+    this._loadBlogList(this.data.blogList.length)
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    this.publishFlag = true
+  // 下拉动作
+  onPullDownRefresh: function(){
+    // blogList清空后重新获取
+    this.setData({
+      blogList: []
+    })
+    this._loadBlogList(0)
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  // 实现模糊搜索
+  onSearch(event){
+    keyword = event.detail.keyword
+    // 先清空列表
+    this.setData({
+      blogList: []
+    })
+    this._loadBlogList(0)
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  //加载博客列表
+  _loadBlogList(start = 0){
+    wx.showLoading({
+      title: '( •̀ ω •́ )y',
+    })
+    wx.cloud.callFunction({
+      name: 'blog',
+      data: {
+        keyword,
+        start,
+        $url: 'bloglist',
+        count: 10,
+      }
+    }).then((res)=> {
+      this.setData({
+        blogList: this.data.blogList.concat(res.result)
+      })
+    })
+    wx.hideLoading()
+    wx.stopPullDownRefresh()
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  // 跳转博客详情
+  goDetail(event){
+    wx.navigateTo({
+      url: '../../pages/blog-detail/blog-detail?blogId=' + event.target.dataset.blogid,
+    })
   }
 })
