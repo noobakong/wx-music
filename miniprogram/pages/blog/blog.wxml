@@ -12,8 +12,9 @@
   <!-- 博客卡片列表 -->
   <view class="blog-list">
     <block wx:for="{{blogList}}" wx:key="index">
-      <view class="blog-pane">
+      <view class="blog-panel">
         <x-blog-card blog="{{item}}" bindtap="goDetail" data-blogid="{{item._id}}"/>
+        <x-blog-ctrl blogId="{{item._id}}"/>
       </view>
     </block>
   </view>
