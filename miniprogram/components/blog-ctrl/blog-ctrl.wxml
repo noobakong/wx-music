@@ -4,8 +4,10 @@
     <text>评论</text>
   </view>
   <view class="ctrl-item" share>
-    <i class="iconfont icon-fenxiang icon"></i>
-    <text>分享</text>
+    <button open-type="share" data-blogid="{{blogId}}" data-blog="{{blog}}" class="share-btn" hover-class="share-hover">
+      <i class="iconfont icon-fenxiang icon"></i>
+      <text>分享</text>
+    </button>
   </view>
 </view>
 
@@ -16,17 +18,6 @@
 />
 
 <x-bottom-modal modalShow="{{modalShow}}">
-  <!-- <form slot="modal-content" report-submit="true" bindsubmit="onSend">
-    <textarea
-      name="content"
-      class="comment-content"
-      placeholder="你想评论点什么？"
-      value="{{content}}"
-      fixed="true"
-      bindinput="onInput"
-    ></textarea>
-    <button class="send" form-type="submit">发送</button>
-  </form> -->
   <view slot="modal-content">
     <textarea
       name="content"

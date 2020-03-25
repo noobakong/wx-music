@@ -6,7 +6,8 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    blogId: String
+    blogId: String,
+    blog: Object
   },
 
   options: {
@@ -116,6 +117,9 @@ Component({
           modalShow:false,
           content: ''
         })
+
+        // 父元素刷新评论
+        this.triggerEvent('refreshCommentList')
 
       })
 

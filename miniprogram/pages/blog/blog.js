@@ -87,6 +87,17 @@ Page({
     this._loadBlogList(0)
   },
 
+  // 用户点击分享按钮
+  onShareAppMessage: function(event){
+    console.log(event)
+    let blogObj = event.target.dataset.blog
+    return {
+      title: '不点不是中国人',
+      path:`/pages/blog-detail/blog-detail?blogId=${blogObj._id}`,
+      imageUrl: 'https://i.loli.net/2020/03/25/VB3qxCtGz2OdPor.jpg'
+    }
+  },
+
   // 实现模糊搜索
   onSearch(event){
     keyword = event.detail.keyword

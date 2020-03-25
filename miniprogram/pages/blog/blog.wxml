@@ -14,7 +14,7 @@
     <block wx:for="{{blogList}}" wx:key="index">
       <view class="blog-panel">
         <x-blog-card blog="{{item}}" bindtap="goDetail" data-blogid="{{item._id}}"/>
-        <x-blog-ctrl blogId="{{item._id}}"/>
+        <x-blog-ctrl blogId="{{item._id}}" blog="{{item}}"/>
       </view>
     </block>
   </view>
