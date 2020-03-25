@@ -6,7 +6,9 @@
     "pages/musiclist/musiclist",
     "pages/player/player",
     "pages/blog-edit/blog-edit",
-    "pages/blog-detail/blog-detail"
+    "pages/blog-detail/blog-detail",
+    "pages/profile-playhistory/profile-playhistory",
+    "pages/profile-myblog/profile-myblog"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

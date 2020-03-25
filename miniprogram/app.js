@@ -1,7 +1,6 @@
 //app.js
 App({
   onLaunch: function () {
-    
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -15,9 +14,12 @@ App({
       })
     }
 
+    this.getOpenId()
+
     // 用于编写一些全局的属性和方法
     this.globalData = {
-      playingMusicId: -1
+      playingMusicId: -1,
+      openid: -1,
     }
   },
 
@@ -26,5 +28,20 @@ App({
   },
   getPlayMusicId(musicId) {
     return this.globalData.playingMusicId
+  },
+
+
+  getOpenId(){
+    wx.cloud.callFunction({
+      name: 'login'
+    }).then((res)=>{
+      const openid = res.result.openid
+      this.globalData.openid = openid
+      
+      // 只有openid第一次存储时才设为空数组
+      if(wx.getStorageSync(openid) == ''){
+        wx.setStorageSync(openid, [])
+      }
+    })
   }
 })
