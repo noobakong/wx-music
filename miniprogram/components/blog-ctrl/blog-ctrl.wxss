@@ -34,7 +34,7 @@
 }
 
 .send {
-  background: #d43c33;
+  background: #4e7ca1;
   color: #fff;
   font-size: 24rpx;
   position: absolute;

@@ -1,4 +1,5 @@
 // pages/playlist/playlist.js
+const db = wx.cloud.database()
 const MAX_LIMIT = 15
 Page({
 
@@ -6,16 +7,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    swiperImaUrls: [ // 轮播图img地址
-      {
-        url: 'http://p1.music.126.net/oeH9rlBAj3UNkhOmfog8Hw==/109951164169407335.jpg',
-      },
-      {
-        url: 'http://p1.music.126.net/xhWAaHI-SIYP8ZMzL9NOqg==/109951164167032995.jpg',
-      },
-      {
-        url: 'http://p1.music.126.net/Yo-FjrJTQ9clkDkuUCTtUg==/109951164169441928.jpg',
-      }],
+    // swiperImaUrls: [ // 轮播图img地址
+    //   {
+    //     url: 'http://p1.music.126.net/oeH9rlBAj3UNkhOmfog8Hw==/109951164169407335.jpg',
+    //   },
+    //   {
+    //     url: 'http://p1.music.126.net/xhWAaHI-SIYP8ZMzL9NOqg==/109951164167032995.jpg',
+    //   },
+    //   {
+    //     url: 'http://p1.music.126.net/Yo-FjrJTQ9clkDkuUCTtUg==/109951164169441928.jpg',
+    //   }],
+    swiperImaUrls: [],
 
     playlist: []
 
@@ -26,6 +28,7 @@ Page({
    */
   onLoad: function (options) {
     this._getPlaylist()
+    this._getSwiper()
   },
 
   /**
@@ -64,6 +67,7 @@ Page({
       playlist: []
     })
     this._getPlaylist()
+    this._getSwiper()
   },
 
   /**
@@ -98,6 +102,14 @@ Page({
       })
       wx.stopPullDownRefresh()
       wx.hideLoading() // 隐藏加载
+    })
+  },
+
+  _getSwiper(){
+    db.collection('swiper').get().then((res)=>{
+      this.setData({
+        swiperImaUrls: res.data
+      })
     })
   }
 })

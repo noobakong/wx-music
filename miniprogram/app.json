@@ -13,13 +13,13 @@
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#d43c33",
+    "navigationBarBackgroundColor": "#4e7ca1",
     "navigationBarTitleText": "音乐&放松",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#474747",
-    "selectedColor": "#d43c43",
+    "selectedColor": "#4e7ca1",
     "list": [
       {
         "pagePath": "pages/playlist/playlist",
